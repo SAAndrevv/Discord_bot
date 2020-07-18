@@ -4,6 +4,7 @@ import time
 import discord
 from dotenv import load_dotenv
 import top_chart_request as tcr
+import top_chart_spotify as tcs
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -33,7 +34,24 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content == "chart!":
+    if message.content == "!Schart":
+        await message.channel.send("Это займет какое-то вермя...")
+
+        chart = tcs.chart()
+        if not chart:
+            chart_send  = "Возникли проблемы на сервере"
+    
+        else:
+            now = time.strftime("---%B %Yг.--- Spotify")
+            chart_send = "\n".join(
+                    [song for song in chart])
+            chart_send = (f'{now}\n{chart_send}')
+
+        await message.channel.send(chart_send)
+
+
+
+    if message.content == "!Ichart":
         await message.channel.send("Это займет какое-то вермя...")
 
         chart = tcr.chart()
@@ -41,7 +59,7 @@ async def on_message(message):
             chart_send  = "Возникли проблемы на сервере"
     
         else:
-            now = time.strftime("---%B %Yг.---")
+            now = time.strftime("---%B %Yг.--- Itunes")
             number = 1
             chart_send = "\n".join(
                     [str(chart.index(song) + 1)+ ") " + song for song in chart])
