@@ -31,7 +31,7 @@ def chart():
                     continue
 
         
-
+        del composition[25:]
         return composition
 
     except:
@@ -44,6 +44,5 @@ def chart():
 
 
 if __name__ == "__main__":
-    chart()
     print("This module is intended for import")
     

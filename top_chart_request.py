@@ -21,9 +21,10 @@ def chart():
     
         sound = []
         for i in range(len(songs)):
-            composition = singers[i].text + " - " + songs[i].text
+            composition = songs[i].text + " - " + singers[i].text
             sound.append(composition)
-        
+
+        del sound[25:]
         return sound
 
     except:
